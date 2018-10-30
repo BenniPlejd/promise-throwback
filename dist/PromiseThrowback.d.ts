@@ -35,7 +35,7 @@ export declare class PromiseThrowback {
     private _resolve;
     /**
      * @private
-     * @property
+     * @property {(reason?: any) => any}
      * @description Rejection callback for the Promise.
      */
     private _reject;
@@ -46,12 +46,12 @@ export declare class PromiseThrowback {
      * @param {number} [indexOfResponse]
      * - Index of response argument in callback.
      * If not specified then the response will be void.
-     * @param {number} indexOfError
+     * @param {number} [indexOfError]
      * - Index of error argument in callback.
      * If the specified argument exists then an error will be returned.
      * If not specified then no error checks will be performed.
      */
-    constructor(indexOfResponse: number, indexOfError?: number);
+    constructor(indexOfResponse?: number, indexOfError?: number);
     /**
      * @public
      * @method
@@ -59,5 +59,12 @@ export declare class PromiseThrowback {
      * @returns {Promise<any>} The response from the callback.
      */
     responseAsync(): Promise<any>;
+    /**
+     * @public
+     * @property {(...args: any[]) => any}
+     * @description
+     * Returns a callback function, where the callback's response and errors
+     * can be returned through the responseAsync() method.
+     */
     readonly throwback: (...args: any[]) => any;
 }

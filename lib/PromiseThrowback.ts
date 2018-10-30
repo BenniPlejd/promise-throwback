@@ -51,12 +51,12 @@ export class PromiseThrowback {
      * @param {number} [indexOfResponse]
      * - Index of response argument in callback.
      * If not specified then the response will be void.
-     * @param {number} indexOfError
+     * @param {number} [indexOfError]
      * - Index of error argument in callback.
      * If the specified argument exists then an error will be returned.
      * If not specified then no error checks will be performed.
      */
-    public constructor(indexOfResponse: number, indexOfError?: number) {
+    public constructor(indexOfResponse?: number, indexOfError?: number) {
         // Specify argument indexes.
         this._indexOfResponse = indexOfResponse;
         this._indexOfError = indexOfError;
@@ -76,7 +76,6 @@ export class PromiseThrowback {
      * @returns {Promise<any>} The response from the callback.
      */
     public async responseAsync(): Promise<any> {
-        // Await the response from the Promise.
         const response = await this._promise;
 
         return response;
@@ -98,6 +97,7 @@ export class PromiseThrowback {
                 const error = args[this._indexOfError];
 
                 if (error) {
+                    // TODO: Fix so that uncaught error doesn't get caught when debugging in VS Code.
                     this._reject(error);
 
                     return;

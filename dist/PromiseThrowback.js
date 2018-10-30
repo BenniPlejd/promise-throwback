@@ -14,7 +14,7 @@ class PromiseThrowback {
      * @param {number} [indexOfResponse]
      * - Index of response argument in callback.
      * If not specified then the response will be void.
-     * @param {number} indexOfError
+     * @param {number} [indexOfError]
      * - Index of error argument in callback.
      * If the specified argument exists then an error will be returned.
      * If not specified then no error checks will be performed.
@@ -37,10 +37,16 @@ class PromiseThrowback {
      * @returns {Promise<any>} The response from the callback.
      */
     async responseAsync() {
-        // Await the response from the Promise.
         const response = await this._promise;
         return response;
     }
+    /**
+     * @public
+     * @property {(...args: any[]) => any}
+     * @description
+     * Returns a callback function, where the callback's response and errors
+     * can be returned through the responseAsync() method.
+     */
     get throwback() {
         // Create callback function.
         return (...args) => {

@@ -5,13 +5,17 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "lint": "tslint -c tslint.json 'lib/**/*.ts'",
     "build": "npm run lint && tsc",
-    "lint": "tslint -c tslint.json 'lib/**/*.ts'"
+    "test": "npm run build && jasmine --config=lib/spec/support/jasmine.json"
   },
   "author": "Benjamin Simonsson",
   "license": "ISC",
   "devDependencies": {
+    "@types/jasmine": "2.8.9",
     "@types/node": "8.10.36",
+    "jasmine": "3.3.0",
+    "jasmine-spec-reporter": "4.2.1",
     "tslint": "5.11.0",
     "typescript": "3.1.4"
   }
