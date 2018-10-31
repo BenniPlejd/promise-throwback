@@ -1,0 +1,8 @@
+.vscode/
+dist/spec/
+dist/**/*.spec.d.ts
+dist/**/*.spec.js
+dist/**/*.spec.js.map
+lib/
+tsconfig.json
+tslint.json

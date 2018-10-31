@@ -55,6 +55,7 @@ class PromiseThrowback {
             if (typeof (this._indexOfError) === 'number') {
                 const error = args[this._indexOfError];
                 if (error) {
+                    // TODO: Fix so that uncaught error doesn't get caught when debugging in VS Code.
                     this._reject(error);
                     return;
                 }
