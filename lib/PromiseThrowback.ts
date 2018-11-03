@@ -1,10 +1,12 @@
+import { IPromiseThrowback } from './IPromiseThrowback';
+
 /**
  * @public
  * @class
  * @description
  * Helper class for asychronously returning a function's callback response.
  */
-export class PromiseThrowback {
+export class PromiseThrowback implements IPromiseThrowback {
     /**
      * @private
      * @property {number}
@@ -71,14 +73,14 @@ export class PromiseThrowback {
 
     /**
      * @public
-     * @property {(...args: any[]) => any}
+     * @property {(...args: any[]) => IThrowbackCallback}
      * @description
      * Generates a callback function, where the callback's response and errors
      * can be resolved through the result property.
      */
     public get callback(): (...args: any[]) => any {
         // Create callback function.
-        return (...args) => {
+        return (...args): any => {
             // If error argument index is specified,
             // then check whether error should occur through rejection.
             if (typeof (this._indexOfError) === 'number') {

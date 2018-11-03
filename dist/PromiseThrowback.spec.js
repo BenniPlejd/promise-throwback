@@ -7,9 +7,8 @@ describe('PromiseThrowback - ', () => {
         // Run function with callback.
         ((callback) => {
             callback();
-        })(promiseThrowback.throwback);
-        setTimeout(promiseThrowback.throwback, 0);
-        const response = await promiseThrowback.responseAsync();
+        })(promiseThrowback.callback);
+        const response = await promiseThrowback.result;
         expect(response).toBeUndefined();
         done();
     });
@@ -19,8 +18,8 @@ describe('PromiseThrowback - ', () => {
         ((callback) => {
             // Return string through callback.
             callback('Lorem Ipsum');
-        })(promiseThrowback.throwback);
-        const response = await promiseThrowback.responseAsync();
+        })(promiseThrowback.callback);
+        const response = await promiseThrowback.result;
         expect(response).toBe('Lorem Ipsum');
         done();
     });
@@ -30,8 +29,8 @@ describe('PromiseThrowback - ', () => {
         ((callback) => {
             // Return string through callback.
             callback(null, null, null, 'Lorem Ipsum');
-        })(promiseThrowback.throwback);
-        const response = await promiseThrowback.responseAsync();
+        })(promiseThrowback.callback);
+        const response = await promiseThrowback.result;
         expect(response).toBe('Lorem Ipsum');
         done();
     });
@@ -48,9 +47,9 @@ describe('PromiseThrowback - ', () => {
             catch (error) {
                 console.error('error');
             }
-        })(promiseThrowback.throwback);
+        })(promiseThrowback.callback);
         try {
-            await promiseThrowback.responseAsync();
+            await promiseThrowback.result;
         }
         catch (error) {
             expect(error instanceof Error).toBe(true);
@@ -73,9 +72,9 @@ describe('PromiseThrowback - ', () => {
             catch (error) {
                 console.error('error');
             }
-        })(promiseThrowback.throwback);
+        })(promiseThrowback.callback);
         try {
-            await promiseThrowback.responseAsync();
+            await promiseThrowback.result;
         }
         catch (error) {
             expect(error instanceof Error).toBe(true);

@@ -1,10 +1,11 @@
+import { IPromiseThrowback } from './IPromiseThrowback';
 /**
  * @public
  * @class
  * @description
  * Helper class for asychronously returning a function's callback response.
  */
-export declare class PromiseThrowback {
+export declare class PromiseThrowback implements IPromiseThrowback {
     /**
      * @private
      * @property {number}
@@ -54,17 +55,16 @@ export declare class PromiseThrowback {
     constructor(indexOfResponse?: number, indexOfError?: number);
     /**
      * @public
-     * @method
-     * @description Asynchronously fetches the response from the callback.
-     * @returns {Promise<any>} The response from the callback.
+     * @property {(...args: any[]) => IThrowbackCallback}
+     * @description
+     * Generates a callback function, where the callback's response and errors
+     * can be resolved through the result property.
      */
-    responseAsync(): Promise<any>;
+    readonly callback: (...args: any[]) => any;
     /**
      * @public
-     * @property {(...args: any[]) => any}
-     * @description
-     * Returns a callback function, where the callback's response and errors
-     * can be returned through the responseAsync() method.
+     * @property {Promise<any>}
+     * @description Gets the response from the callback, as a Promise.
      */
-    readonly throwback: (...args: any[]) => any;
+    readonly result: Promise<any>;
 }
