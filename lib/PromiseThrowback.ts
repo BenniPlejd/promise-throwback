@@ -71,24 +71,12 @@ export class PromiseThrowback {
 
     /**
      * @public
-     * @method
-     * @description Asynchronously fetches the response from the callback.
-     * @returns {Promise<any>} The response from the callback.
-     */
-    public async responseAsync(): Promise<any> {
-        const response = await this._promise;
-
-        return response;
-    }
-
-    /**
-     * @public
      * @property {(...args: any[]) => any}
      * @description
-     * Returns a callback function, where the callback's response and errors
-     * can be returned through the responseAsync() method.
+     * Generates a callback function, where the callback's response and errors
+     * can be resolved through the result property.
      */
-    public get throwback(): (...args: any[]) => any {
+    public get callback(): (...args: any[]) => any {
         // Create callback function.
         return (...args) => {
             // If error argument index is specified,
@@ -115,5 +103,14 @@ export class PromiseThrowback {
             // Otherwise return void.
             this._resolve();
         };
+    }
+
+    /**
+     * @public
+     * @property {Promise<any>}
+     * @description Gets the response from the callback, as a Promise.
+     */
+    public get result(): Promise<any> {
+        return this._promise;
     }
 }

@@ -7,11 +7,9 @@ describe('PromiseThrowback - ', () => {
         // Run function with callback.
         ((callback) => {
             callback();
-        })(promiseThrowback.throwback);
+        })(promiseThrowback.callback);
 
-        setTimeout(promiseThrowback.throwback, 0);
-
-        const response = await promiseThrowback.responseAsync();
+        const response = await promiseThrowback.result;
 
         expect(response).toBeUndefined();
 
@@ -25,9 +23,9 @@ describe('PromiseThrowback - ', () => {
         ((callback) => {
             // Return string through callback.
             callback('Lorem Ipsum');
-        })(promiseThrowback.throwback);
+        })(promiseThrowback.callback);
 
-        const response = await promiseThrowback.responseAsync();
+        const response = await promiseThrowback.result;
 
         expect(response).toBe('Lorem Ipsum');
 
@@ -41,9 +39,9 @@ describe('PromiseThrowback - ', () => {
         ((callback) => {
             // Return string through callback.
             callback(null, null, null, 'Lorem Ipsum');
-        })(promiseThrowback.throwback);
+        })(promiseThrowback.callback);
 
-        const response = await promiseThrowback.responseAsync();
+        const response = await promiseThrowback.result;
 
         expect(response).toBe('Lorem Ipsum');
 
@@ -64,10 +62,10 @@ describe('PromiseThrowback - ', () => {
             } catch (error) {
                 console.error('error');
             }
-        })(promiseThrowback.throwback);
+        })(promiseThrowback.callback);
 
         try {
-            await promiseThrowback.responseAsync();
+            await promiseThrowback.result;
         } catch (error) {
             expect(error instanceof Error).toBe(true);
             expect(error.message).toBe('Dolor Sit');
@@ -94,10 +92,10 @@ describe('PromiseThrowback - ', () => {
             } catch (error) {
                 console.error('error');
             }
-        })(promiseThrowback.throwback);
+        })(promiseThrowback.callback);
 
         try {
-            await promiseThrowback.responseAsync();
+            await promiseThrowback.result;
         } catch (error) {
             expect(error instanceof Error).toBe(true);
             expect(error.message).toBe('Dolor Sit');
