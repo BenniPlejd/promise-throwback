@@ -6,7 +6,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "lint": "tslint -c tslint.json 'lib/**/*.ts'",
-    "build": "npm run lint && tsc",
+    "build": "npm run lint && rm -rf dist/ && tsc",
     "test": "npm run build && jasmine --config=lib/spec/support/jasmine.json"
   },
   "author": "Benjamin Simonsson",
